@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="subtract()">-</button>
+        {{ num }}
+        <button @click="add()">+</button>
+        <hr>
+        <br>
+
+
+        <input type="text" v-model="content">
+        {{ content }}
+        <button @click="submit">提交</button>
+
+    </div>
+</body>
+<script>
+        new Vue({
+            el:"#app",
+            data:{
+                num:1,
+                content:""
+            },
+            methods:{
+                add(){
+                    this.num++
+                    if(this.num >=10){
+                        this.num = 10
+                    }
+                },
+                subtract(){
+                    this.num--
+                    if(this.num <=0){
+                        this.num = 0
+                     }
+                },
+                submit(){
+                    if(this.content==""){
+                        alert("数据不能为空")
+                    }else{
+                        this.content="正确"
+
+                    }
+                },
+                
+            }
+        })
+    </script>
+</html>

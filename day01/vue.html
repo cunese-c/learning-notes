@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ user }}
+        <h3>用户信息</h3>
+        <input type="text" v-model="text" @keyup.enter='add'><button @click="click">添加</button>
+        <p>您输入的值为：{{ text }}</p>
+        <div v-show="this.aa.length==0">
+            没有用户信息
+        </div>
+        <ul> 
+            <li v-for="(item,index) in aa">
+                {{ item.name }}，年龄：{{item.age}}
+                <button @click="del(index)">X</button>
+                <button @click="reduce(index)">年龄减少</button>
+                <button @click="increase(index)">年龄增加</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                user:"123",
+                text:"",
+                aa:[{id:"1","name":"小红","age":17},
+                {id:"2","name":"小明","age":18},
+                {id:"3","name":"小刚","age":21},
+                {id:"4","name":"小王","age":20},
+                {id:"5","name":"小力","age":21}
+            ]
+            },
+            methods:{
+                del(i){
+                    this.aa.splice(i,1)
+                },
+                add(){
+                    this.aa.push({name:this.text,age:""})
+                },
+                increase(index){
+                    this.aa[index].age++
+                },
+                reduce(index){
+                    this.aa[index].age--
+                },
+                click(){
+                    this.aa.push({name:this.text})
+                }
+            }
+        })
+    </script>
+</body>
+</html>

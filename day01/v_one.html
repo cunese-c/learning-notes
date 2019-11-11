@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h3>用户信息</h3>
+        <input type="text" v-model="text" @keyup.enter="ok">
+        <br />
+        <input type="text" v-model="text_age">
+        <br />
+        <p>您输入的值为 {{ text }} {{ text_age}} </p>
+        <button @click="add">添加</button>
+        <div v-show="this.user.length==0">没有用户信息</div>
+        <ul>
+            <li v-for="(item,index) in user">
+                id：{{ item.id}} 姓名：{{ item.name }} 年龄：{{ item.age }}
+                <button @click="remove(index)">X</button>
+                <button @click="minus(index)">年龄减少</button>
+                <button @click="plus(index)">年龄增加</button>
+            </li>
+        </ul>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                text: "",
+                text_age: "",
+                user: [
+                    { id: 1, "name": "张三", "age": 18 },
+                    { id: 2, "name": "李四", "age": 19 },
+                    { id: 3, "name": "王五", "age": 20 },
+                    { id: 4, "name": "马六", "age": 21 },
+                    { id: 5, "name": "熊大", "age": 22 }
+                ]
+            },
+            methods: {
+                ok() {
+                    this.user.push({ name: this.text, age: "19" })
+                },
+                add() {
+                    this.user.push({ name: this.text, age: this.text_age })
+                },
+                remove(i) {
+                    this.user.splice(i, 1)
+                },
+                minus(i) {
+                
+                    this.user[i].age--
+                },
+                plus(i) {
+                    this.user[i].age++
+                }
+
+
+            }
+
+        })
+    </script>
+</body>
+
+</html>
